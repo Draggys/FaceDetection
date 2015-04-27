@@ -63,8 +63,33 @@ end
 % Extract features and training data
 face_fnames = dir('Data\FACES\*.bmp');
 
+% Debug Point 5
+dinfo4 = load('Data\DebugInfo\debuginfo4.mat');
+%ni = dinfo4.ni; % does not contain ni
+ni = 1;
+ii_ims = LoadImDataDir('Data\TrainingImages\FACES\', 100);
+fmat = VecAllFeatures(dinfo4.all_ftypes, 19, 19);
 
+if ~isequal(dinfo4.fmat, fmat)
+    msg = '[Fail] (Debug Point 5): VecAllFeatures is not reliable';
+    error(msg);
+else
+    disp('[Success] (Debug Point5): VecAllFeatures is reliable');
+end
 
+if ~isequal(dinfo4.ii_ims, ii_ims) % obs change to 100 later
+    msg = '[Fail] (Debug Point 5): LoadImDataDir is not reliable for ii_ims';
+    error(msg);
+else
+    disp('[Success] (Debug Point5): LoadImDataDir is reliable for ii_ims');
+end
+
+if ~isequal(dinfo4.fs, fmat * ii_ims)
+    msg = '[Fail] (Debug Point 5): LoadImDataDir is not reliable for fs == fmat * ii_ims';
+    error(msg);
+else
+    disp('[Success] (Debug Point5): LoadImDataDir is reliable for fs == fmat * ii_ims');
+end
 
 
 
