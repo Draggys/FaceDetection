@@ -35,8 +35,29 @@ a = abs(fs(1) - VecFeature(dinfo2.ftypes(1, :), W, H) * ii_im(:)) < eps;
 b = abs(fs(2) - VecFeature(dinfo2.ftypes(2, :), W, H) * ii_im(:)) < eps;
 c = abs(fs(3) - VecFeature(dinfo2.ftypes(3, :), W, H) * ii_im(:)) < eps;
 d = abs(fs(4) - VecFeature(dinfo2.ftypes(4, :), W, H) * ii_im(:)) < eps;
-if ~(a == b && b == c && c == d)
+if ~(a == b && b == c && c == d) && a == 0
     msg = '[Fail] (Debug Point3): VecFeature is not reliable';
     error(msg);
 end
 disp('[Success] (Debug Point3): VecFeature is reliable');
+
+% Enumerate all features
+all_ftypes = EnumAllFeatures(W, H);
+% Sanity check
+if size(all_ftypes, 1) ~= 32746
+    msg = '[Fail] EnumAllFeatures: Failed sanity check';
+    error(msg);
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
