@@ -22,10 +22,10 @@ VecBoxSumSanityCheck(im, ii_im);
 
 % Debug Point 3
 % Sanity check
-VecFeatureSanityCheck(im, ii_im, 1)
-VecFeatureSanityCheck(im, ii_im, 2)
-VecFeatureSanityCheck(im, ii_im, 3)
-VecFeatureSanityCheck(im, ii_im, 4)
+% % % VecFeatureSanityCheck(im, ii_im, 1)
+% % % VecFeatureSanityCheck(im, ii_im, 2)
+% % % VecFeatureSanityCheck(im, ii_im, 3)
+% % % VecFeatureSanityCheck(im, ii_im, 4)
  % Debug point check
 dinfo2 = load('Data\DebugInfo\debuginfo2.mat');
 fs = dinfo2.fs;
@@ -49,10 +49,19 @@ if size(all_ftypes, 1) ~= 32746
     error(msg);
 end
 
+% Debug Point 4
+dinfo3 = load('Data\DebugInfo\debuginfo3.mat');
+fmat = VecAllFeatures(dinfo3.all_ftypes, W, H);
+anyOver0 = sum(abs(dinfo3.fs - fmat * ii_im(:)) > eps);
+if anyOver0 == 0
+    disp('[Success] (Debug Point4): VecAllFeatures is reliable');
+else
+    msg = '[Fail] (Debug Point 4): VecAllFeatures is not reliable';
+    error(msg);
+end
 
-
-
-
+% Extract features and training data
+face_fnames = dir('Data\FACES\*.bmp');
 
 
 
