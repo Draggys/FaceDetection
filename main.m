@@ -3,6 +3,7 @@ clear all;
 clc;
 
 addpath('Data\TrainingImages\FACES\');
+addpath('Data\TrainingImages\NFACES\');
 
 % Debug Point 1
 [im, ii_im] = LoadIm('face00001.bmp', 1);
@@ -66,8 +67,8 @@ face_fnames = dir('Data\FACES\*.bmp');
 % Debug Point 5
 dinfo4 = load('Data\DebugInfo\debuginfo4.mat');
 %ni = dinfo4.ni; % does not contain ni
-ni = 1;
-ii_ims = LoadImDataDir('Data\TrainingImages\FACES\', 100);
+ni = 100;
+ii_ims = LoadImDataDir('Data\TrainingImages\FACES\', ni);
 fmat = VecAllFeatures(dinfo4.all_ftypes, 19, 19);
 
 if ~isequal(dinfo4.fmat, fmat)
@@ -91,6 +92,15 @@ else
     disp('[Success] (Debug Point5): LoadImDataDir is reliable for fs == fmat * ii_ims');
 end
 
+% Create the data required for training the face detector
+dinfo5 = load('Data\DebugInfo\debuginfo5.mat');
+train_inds = dinfo5.train_inds;
+all_ftypes = dinfo5.all_ftypes;
+SaveTrainingData(all_ftypes, train_inds, 'training_data.mat');
+
+disp('-');
+disp('From now on you can load your saved file into Matlab with the following command:')
+disp('Tdata = load(''training_data.mat'')');
 
 
 
