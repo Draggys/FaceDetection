@@ -17,23 +17,26 @@ else
     error(msg);
 end
 
-%Debug Point 2
-[W, H] = size(ii_im);
-for x = 1 : W
-   for y = 1 : H
-       for w = 1 : W
-          for h = 1 : H
-             b_vec = VecBoxSum(x, y, w, h, 19, 19);
-             if ~isnan(b_vec)
-                 A1 = b_vec * ii_im(:);
-                 A2 = sum(sum(im(y:y+h-1, x:x+w-1)));
-                 if ~(abs(A1 - A2) < 0.001)
-                    msg = ('[Fail] (Debug Point2): VecBoxSum is not reliable'); 
-                    error(msg);
-                 end
-             end
-          end
-       end
-   end
+% Debug Point 2
+VecBoxSumSanityCheck(im, ii_im);
+
+% Debug Point 3
+% Sanity check
+VecFeatureSanityCheck(im, ii_im, 1)
+VecFeatureSanityCheck(im, ii_im, 2)
+VecFeatureSanityCheck(im, ii_im, 3)
+VecFeatureSanityCheck(im, ii_im, 4)
+ % Debug point check
+dinfo2 = load('Data\DebugInfo\debuginfo2.mat');
+fs = dinfo2.fs;
+W = 19;
+H = 19;
+a = abs(fs(1) - VecFeature(dinfo2.ftypes(1, :), W, H) * ii_im(:)) < eps;
+b = abs(fs(2) - VecFeature(dinfo2.ftypes(2, :), W, H) * ii_im(:)) < eps;
+c = abs(fs(3) - VecFeature(dinfo2.ftypes(3, :), W, H) * ii_im(:)) < eps;
+d = abs(fs(4) - VecFeature(dinfo2.ftypes(4, :), W, H) * ii_im(:)) < eps;
+if ~(a == b && b == c && c == d)
+    msg = '[Fail] (Debug Point3): VecFeature is not reliable';
+    error(msg);
 end
-disp('[Success] (Debug Point2): VecBoxSum is reliable');
+disp('[Success] (Debug Point3): VecFeature is reliable');
