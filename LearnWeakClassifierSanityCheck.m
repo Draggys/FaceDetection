@@ -1,4 +1,4 @@
-function [ output_args ] = LearnWeakClassifierSanityCheck( Tdata )
+function [ ] = LearnWeakClassifierSanityCheck( Tdata )
     fmat = Tdata.fmat;
     ys = Tdata.ys;
     ii_ims = Tdata.ii_ims;
