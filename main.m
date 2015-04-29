@@ -1,4 +1,4 @@
-close all;
+inaclose all;
 clear all;
 clc;
 
