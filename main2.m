@@ -15,6 +15,14 @@ ws = ws / norm(ws, 1);
 % Sanity check
 LearnWeakClassifierSanityCheck(Tdata);
 
+% Display function I, weak classifier
 fpic = MakeFeaturePic([4, 5, 5, 5, 5], 19, 19);
 fig2 = figure;
-imagesc(fpic)
+colormap('gray');
+imagesc(fpic);
+
+% Display function II, strong classifier
+cpic = MakeClassifierPic(Tdata.all_ftypes, [5192, 12765], [1.8725, 1.467], [1, -1], 19, 19);
+fig3 = figure;
+colormap('gray');
+imagesc(cpic);
