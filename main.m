@@ -7,14 +7,6 @@ addpath('Data\TrainingImages\NFACES\');
 
 % Debug Point 1
 [im, ii_im] = LoadIm('face00001.bmp', 1);
-% Show image and ii_im
-fig1 = figure
-colormap('gray')
-imagesc(im)
-fig2 = figure
-colormap('gray')
-imagesc(ii_im)
-
 dinfo1 = load('Data\DebugInfo\debuginfo1.mat');
 eps = 1e-6;
 s1 = sum(abs(dinfo1.im(:) - im(:)) > eps);
@@ -31,11 +23,10 @@ VecBoxSumSanityCheck(im, ii_im);
 
 % Debug Point 3
 % Sanity check
-VecFeatureSanityCheck(im, ii_im, 1)
-VecFeatureSanityCheck(im, ii_im, 2)
-VecFeatureSanityCheck(im, ii_im, 3)
-VecFeatureSanityCheck(im, ii_im, 4)
-
+% % % VecFeatureSanityCheck(im, ii_im, 1)
+% % % VecFeatureSanityCheck(im, ii_im, 2)
+% % % VecFeatureSanityCheck(im, ii_im, 3)
+% % % VecFeatureSanityCheck(im, ii_im, 4)
  % Debug point check
 dinfo2 = load('Data\DebugInfo\debuginfo2.mat');
 fs = dinfo2.fs;

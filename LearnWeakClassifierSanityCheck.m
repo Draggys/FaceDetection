@@ -4,7 +4,7 @@ function [ ] = LearnWeakClassifierSanityCheck( Tdata )
     ii_ims = Tdata.ii_ims;
     fs = fmat(12028, :) * ii_ims;
     ws = rand(1, size(fs, 2));
-    ws = ws / sum(ws);
+    ws = ws / norm(ws, 1);
     [ theta, p, err ] = LearnWeakClassifier( ws, fs, ys );
     
     % Should be around -3.7698

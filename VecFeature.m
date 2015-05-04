@@ -27,5 +27,7 @@ function [ ftype_vec ] = VecFeature( ftype, W, H )
         ftype_vec = VecBoxSum(x+w, y, w, h, W, H) + VecBoxSum(x, y + h, w, h, W, H) - ...
             VecBoxSum(x, y, w, h, W, H) - VecBoxSum(x + w, y + h, w, h, W, H);
     end
+        
+    ftype_vec = ftype_vec;
 end
 

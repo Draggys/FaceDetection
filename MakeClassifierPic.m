@@ -8,4 +8,3 @@ function [ cpic ] = MakeClassifierPic( all_ftypes, chosen_f, alphas, ps, W, H )
     end
 end
 
-   
