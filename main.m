@@ -71,21 +71,21 @@ ni = 100;
 ii_ims = LoadImDataDir('Data\TrainingImages\FACES\', ni);
 fmat = VecAllFeatures(dinfo4.all_ftypes, 19, 19);
 
-if ~isequal(dinfo4.fmat, fmat)
+if sum(sum(dinfo4.fmat - fmat )) > eps
     msg = '[Fail] (Debug Point 5): VecAllFeatures is not reliable';
     error(msg);
 else
     disp('[Success] (Debug Point5): VecAllFeatures is reliable');
 end
 
-if ~isequal(dinfo4.ii_ims, ii_ims) % obs change to 100 later
+if sum(sum(dinfo4.ii_ims - ii_ims)) > eps
     msg = '[Fail] (Debug Point 5): LoadImDataDir is not reliable for ii_ims';
     error(msg);
 else
     disp('[Success] (Debug Point5): LoadImDataDir is reliable for ii_ims');
 end
 
-if ~isequal(dinfo4.fs, fmat * ii_ims)
+if sum(sum(dinfo4.fs - (fmat * ii_ims))) > eps
     msg = '[Fail] (Debug Point 5): LoadImDataDir is not reliable for fs == fmat * ii_ims';
     error(msg);
 else
