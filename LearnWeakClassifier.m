@@ -11,8 +11,8 @@ function [ theta, p, err ] = LearnWeakClassifier( ws, fs, ys, vargin )
         % p, the learnt parameters of the weak classifier and its associated
         % err, error    
         
-    uP = nansum(ws .* fs .* (1 + ys)) / nansum(ws .* (1 + ys));
-    uN = nansum(ws .* fs .* (1 - ys)) / nansum(ws .* (1 - ys));
+    uP = sum(ws .* fs .* (1 + ys)) / sum(ws .* (1 + ys));
+    uN = sum(ws .* fs .* (1 - ys)) / sum(ws .* (1 - ys));
 
     theta = 0.5 * (uP + uN);
     

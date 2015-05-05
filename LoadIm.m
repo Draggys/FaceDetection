@@ -15,6 +15,9 @@ function [ im, ii_im ] = LoadIm( im_fname, varargin )
     im = im(:);
     mu = mean(im);
     sigma = std(im);
+    if sigma == 0
+       sigma = 1; 
+    end
     im = (im - mu) / sigma;
 
     dflag = 0;

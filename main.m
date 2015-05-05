@@ -7,6 +7,14 @@ addpath('Data\TrainingImages\NFACES\');
 
 % Debug Point 1
 [im, ii_im] = LoadIm('face00001.bmp', 1);
+
+fig2 = figure;
+colormap('gray');
+imagesc(im);
+fig2 = figure;
+colormap('gray');
+imagesc(ii_im);
+
 dinfo1 = load('Data\DebugInfo\debuginfo1.mat');
 eps = 1e-6;
 s1 = sum(abs(dinfo1.im(:) - im(:)) > eps);

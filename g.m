@@ -6,12 +6,9 @@ function [ out ] = g( fs, p, theta )
         % p = {-1, 1}
         % theta = (p, theta)
     % Output:
-        % out, -1 or 1
+        % out, array of -1 or 1
         
-    if p .* fs < p .* theta
-       out = 1; 
-    else
-       out = -1; 
-    end
+    out = p .* fs < p * theta;
+    out = double(out);
+    out(out == 0) = -1;
 end
-

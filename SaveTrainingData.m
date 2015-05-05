@@ -13,7 +13,7 @@ function [ ] = SaveTrainingData( all_ftypes, train_inds, s_fn )
     faces = LoadImDataDir('Data\TrainingImages\FACES\');
     nfaces = LoadImDataDir('Data\TrainingImages\NFACES\');
     ii_ims = [faces nfaces];
-   
+    
     % Ground truth array
     ys = [ones(1, size(faces, 2)) -ones(1, size(nfaces, 2))];
     
