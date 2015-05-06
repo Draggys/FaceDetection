@@ -13,9 +13,11 @@ function [ ] = SaveTrainingData( all_ftypes, train_inds, s_fn )
     faces = LoadImDataDir('Data\TrainingImages\FACES\');
     nfaces = LoadImDataDir('Data\TrainingImages\NFACES\');
     ii_ims = [faces nfaces];
+    ii_ims = ii_ims(:, train_inds);
     
     % Ground truth array
     ys = [ones(1, size(faces, 2)) -ones(1, size(nfaces, 2))];
+    ys = ys(:, train_inds);
     
     fmat = VecAllFeatures(all_ftypes, W, H);
    

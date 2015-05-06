@@ -7,18 +7,26 @@ function [ Cparams ] = BoostingAlg( Tdata, T )
         % Cparams, a struct containing: alphas, Thetas, fmat, all_ftypes
             
     fs = Tdata.fmat * Tdata.ii_ims;
-    
+   
+    m = sum(Tdata.ys == -1);
     n = size(Tdata.ys, 2);
-    m = Tdata.nrNFaces;
     
     % init weights
-    w = [ones(1, Tdata.nrFaces) * (1/(2*(n-m))) ones(1, Tdata.nrNFaces) * (1/(2*m))];
+    w = zeros(1, size(Tdata.ys, 2));
+    for i = 1 : size(Tdata.ys, 2)
+        if Tdata.ys(i) == -1
+           w(i) = 1 / (2 * m); 
+        else
+           w(i) = 1 / (2 * (n - m));
+        end
+    end
     
     Thetas = zeros(T, 3);
     alphas = zeros(T, 1);
     % for each classifier
+    
     for t = 1 : T
-        w = w ./ sum(w);
+        w = w / sum(w);
         
         bestErr = NaN;
         % train the weak classifier for each feature j
@@ -34,23 +42,19 @@ function [ Cparams ] = BoostingAlg( Tdata, T )
                bestTheta = theta;
                bestJ = j;
             end
-            
-            if((j == 401 && t == 2) || (j == 477) && (t == 2))
-               j
-               err
-            end
         end
         
         alphas(t) = 0.5 * log((1-bestErr) / bestErr);
-        w = w .* exp(-alphas(t) .* Tdata.ys .* g(fs(bestJ, :), bestP, bestTheta));
+       w = w .* exp(-alphas(t) .* Tdata.ys .* g(fs(bestJ, :), bestP, bestTheta));
+       %w = w .* exp(-alphas(t) * Tdata.ys .* ((bestP * fs(bestJ, :) < bestP * bestTheta) * 2 -1));
         
         Thetas(t, 1) = bestJ; % denotes the index of fs
         Thetas(t, 2) = bestTheta;
         Thetas(t, 3) = bestP;
     end
     
-    disp('------------------------------------------------------')
-    Thetas(:)
-    alphas
+%     disp('------------------------------------------------------')
+%     Thetas(:)
+%     alphas
     Cparams = struct('alphas', alphas, 'Thetas', Thetas, 'fmat', Tdata.fmat, 'all_ftypes', Tdata.all_ftypes);
 end

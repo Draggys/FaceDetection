@@ -22,6 +22,8 @@ s2 = sum(abs(dinfo1.ii_im(:) - ii_im(:)) > eps);
 if ((s1 == 0) && s2 == 0)
     disp('[Success] (Debug Point1): LoadIm is reliable');
 else
+    s1
+    s2
     msg = '[Fail] (Debug Point1): LoadIm is not reliable';
     error(msg);
 end
@@ -30,11 +32,11 @@ end
 VecBoxSumSanityCheck(im, ii_im);
 
 % Debug Point 3
-% Sanity check
-% % % VecFeatureSanityCheck(im, ii_im, 1)
-% % % VecFeatureSanityCheck(im, ii_im, 2)
-% % % VecFeatureSanityCheck(im, ii_im, 3)
-% % % VecFeatureSanityCheck(im, ii_im, 4)
+%Sanity check
+VecFeatureSanityCheck(im, ii_im, 1)
+VecFeatureSanityCheck(im, ii_im, 2)
+VecFeatureSanityCheck(im, ii_im, 3)
+VecFeatureSanityCheck(im, ii_im, 4)
  % Debug point check
 dinfo2 = load('Data\DebugInfo\debuginfo2.mat');
 fs = dinfo2.fs;
@@ -79,21 +81,21 @@ ni = 100;
 ii_ims = LoadImDataDir('Data\TrainingImages\FACES\', ni);
 fmat = VecAllFeatures(dinfo4.all_ftypes, 19, 19);
 
-if sum(sum(dinfo4.fmat - fmat )) > eps
+if sum(abs(dinfo4.fmat(:) - fmat(:))) > eps
     msg = '[Fail] (Debug Point 5): VecAllFeatures is not reliable';
     error(msg);
 else
     disp('[Success] (Debug Point5): VecAllFeatures is reliable');
 end
 
-if sum(sum(dinfo4.ii_ims - ii_ims)) > eps
+if sum(abs(dinfo4.ii_ims - ii_ims)) > eps
     msg = '[Fail] (Debug Point 5): LoadImDataDir is not reliable for ii_ims';
     error(msg);
 else
     disp('[Success] (Debug Point5): LoadImDataDir is reliable for ii_ims');
 end
 
-if sum(sum(dinfo4.fs - (fmat * ii_ims))) > eps
+if sum(abs(dinfo4.fs - (fmat * ii_ims))) > eps 
     msg = '[Fail] (Debug Point 5): LoadImDataDir is not reliable for fs == fmat * ii_ims';
     error(msg);
 else

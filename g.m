@@ -8,7 +8,8 @@ function [ out ] = g( fs, p, theta )
     % Output:
         % out, array of -1 or 1
         
-    out = p .* fs < p * theta;
+    thresh = p * theta;
+    out = p .* fs < thresh;
     out = double(out);
     out(out == 0) = -1;
 end

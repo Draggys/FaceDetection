@@ -10,7 +10,7 @@ function [ theta, p, err ] = LearnWeakClassifier( ws, fs, ys, vargin )
         % theta, threshold
         % p, the learnt parameters of the weak classifier and its associated
         % err, error    
-        
+      
     uP = sum(ws .* fs .* (1 + ys)) / sum(ws .* (1 + ys));
     uN = sum(ws .* fs .* (1 - ys)) / sum(ws .* (1 - ys));
 
