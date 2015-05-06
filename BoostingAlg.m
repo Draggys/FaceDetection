@@ -32,10 +32,6 @@ function [ Cparams ] = BoostingAlg( Tdata, T )
         % train the weak classifier for each feature j
         for j = 1 : size(fs, 1)
             [theta, p, err] = LearnWeakClassifier(w, fs(j, :), Tdata.ys);
-            
-            % Same as err from LearnWeakClassifier..
-            % err = 0.5 * sum(w .* abs(g(fs(j, :), p, theta) - Tdata.ys));
-           
             if isnan(bestErr) || err <= bestErr
                bestErr = err;
                bestP = p;
@@ -46,15 +42,9 @@ function [ Cparams ] = BoostingAlg( Tdata, T )
         
         alphas(t) = 0.5 * log((1-bestErr) / bestErr);
        w = w .* exp(-alphas(t) .* Tdata.ys .* g(fs(bestJ, :), bestP, bestTheta));
-       %w = w .* exp(-alphas(t) * Tdata.ys .* ((bestP * fs(bestJ, :) < bestP * bestTheta) * 2 -1));
-        
         Thetas(t, 1) = bestJ; % denotes the index of fs
         Thetas(t, 2) = bestTheta;
         Thetas(t, 3) = bestP;
     end
-    
-%     disp('------------------------------------------------------')
-%     Thetas(:)
-%     alphas
     Cparams = struct('alphas', alphas, 'Thetas', Thetas, 'fmat', Tdata.fmat, 'all_ftypes', Tdata.all_ftypes);
 end
