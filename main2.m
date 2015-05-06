@@ -13,7 +13,7 @@ fs = fmat(12028, :) * ii_ims;
 %ws = rand(1, size(fs, 2));
 ws = ones(1, size(fs, 2)) / size(fs, 2);
 %ws = ws / sum(ws);
-[ theta, p, err ] = LearnWeakClassifier( ws, fs, ys, Tdata.nrFaces );
+[ theta, p, err ] = LearnWeakClassifier( ws, fs, ys, sum(ys==1));
 % Sanity check
 LearnWeakClassifierSanityCheck(Tdata);
 
@@ -93,6 +93,11 @@ else
    disp('[Success] BoostingAlg: Debug Point dinfo7'); 
 end
 
+alphas = Cparams.alphas;
+Thetas = Cparams.Thetas;
+fmat = Cparams.fmat;
+all_ftypes = Cparams.all_ftypes;
+save('Cparams', 'alphas', 'Thetas', 'fmat', 'all_ftypes');
 
 fs1 = Cparams.Thetas(1, 1);
 fs2 = Cparams.Thetas(2, 1);

@@ -23,8 +23,8 @@ function [ Cparams ] = BoostingAlg( Tdata, T )
     
     Thetas = zeros(T, 3);
     alphas = zeros(T, 1);
-    % for each classifier
     
+    % for each classifier
     for t = 1 : T
         w = w / sum(w);
         
