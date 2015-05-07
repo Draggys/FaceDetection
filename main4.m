@@ -13,5 +13,5 @@ Cparams = load('Cparams.mat');
 % ScanImageFixedSize(Cparams, ii_im);
 
 %im = imread('Data\TrainingImages\FACES\face00001.bmp');
-im = imread('Data\TestImages\big_one_chris.png');
-dets = ScanImageFixedSize(Cparams, im);
+im = imread('Data\TestImages\many_faces.jpg');
+dets = ScanImageFixedSize(Cparams, im)
