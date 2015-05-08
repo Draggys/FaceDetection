@@ -10,20 +10,30 @@ function [ scs ] = ApplyBoxDetector( Cparams, ii_im, ii_im2, x, y, L )
     fs_i = Cparams.Thetas(:, 1);
     fmat = Cparams.fmat(fs_i, :);
     fs = fmat * im(:); 
-    
+%     
+%     ftypes = Cparams.all_ftypes(fs_i, :);
+%     for i = 1 : size(fs_i, 1)
+%        if ftypes(i, 1) == 3
+%            fs(i) = fs(i) + ftypes(i, 1) * L * L * mu;
+%        end
+%     end
+%     fs = fs / sigma;
+
     ftypes = Cparams.all_ftypes(fs_i, :);
-    for i = 1 : size(fs_i, 1)
-       if ftypes(i, 1) == 3
-           fs(i) = fs(i) + ftypes(i, 1) * L * L * mu;
-       end
-    end
+    ftype3 = ftypes(:, 1) == 3;
+    fs = fs + ftype3 * L * L * mu;
     fs = fs / sigma;
-      
-    T = size(Cparams.alphas, 1);
-    score = 0;  
-    for t = 1 : T
-       score = score + Cparams.alphas(t) * g(fs(t, :), ...
-           Cparams.Thetas(t, 3), Cparams.Thetas(t, 2)); 
-    end
-     scs = score;
+    
+    
+%     T = size(Cparams.alphas, 1);
+%     score = 0;  
+%     for t = 1 : T
+%        score = score + Cparams.alphas(t) * g(fs(t, :), ...
+%            Cparams.Thetas(t, 3), Cparams.Thetas(t, 2)); 
+%     end
+%      scs = score;
+%      
+
+    p = Cparams.Thetas(:, 3);
+    scs = sum(Cparams.alphas .* ((p .* fs < p .* Cparams.Thetas(:,2)) * 2 - 1));
 end

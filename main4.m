@@ -2,6 +2,8 @@ close all;
 clear all;
 clc;      
 
+profile on
+
 addpath('Data\TestImages\');
 addpath('Data\TrainingImages\FACES\');
 
@@ -17,3 +19,7 @@ im2 = imread('Data\TestImages\big_one_chris.png');
 theta = 3;
 dets = ScanImageOverScale(Cparams, im2, 0.6, 1.3, 0.06, theta);
 DisplayDetections(im2, dets);
+
+profile viewer
+p = profile('info');
+profsave(p, 'profile_results');

@@ -97,8 +97,10 @@ alphas = Cparams.alphas;
 Thetas = Cparams.Thetas;
 fmat = Cparams.fmat;
 all_ftypes = Cparams.all_ftypes;
-save('Cparams', 'alphas', 'Thetas', 'fmat', 'all_ftypes');
+%save('Cparams', 'alphas', 'Thetas', 'fmat', 'all_ftypes');
 
+
+Tdata.fmat = fmat(1:1000, :);
 fs1 = Cparams.Thetas(1, 1);
 fs2 = Cparams.Thetas(2, 1);
 fs3 = Cparams.Thetas(3, 1);

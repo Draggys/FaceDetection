@@ -17,6 +17,5 @@ for i = 3 : size(images, 1)
     DisplayDetections(im, dets);
     
     disp(['' num2str(i) '/' num2str(size(images,1))]);
-    %break;
 end   
 

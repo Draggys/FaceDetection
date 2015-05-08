@@ -9,5 +9,5 @@ function [ fmat ] = VecAllFeatures( all_ftypes, W, H )
         fmat(i, :) = VecFeature(all_ftypes(i, :), W, H);
     end
 
+    fmat = sparse(fmat);
 end
-
