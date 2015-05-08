@@ -2,6 +2,7 @@ close all;
 clear all;
 clc;
 
+eps = 1e-6;
 Tdata = load('training_data.mat');
 Cparams = load('Cparams.mat');
 
