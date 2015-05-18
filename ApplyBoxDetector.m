@@ -23,8 +23,8 @@ function [ scs ] = ApplyBoxDetector( Cparams, ii_im, ii_im2, x, y, L )
     ftype3 = ftypes(:, 1) == 3;
     fs = fs + ftype3 * L * L * mu;
     fs = fs / sigma;
-    
-    
+%     
+%     
 %     T = size(Cparams.alphas, 1);
 %     score = 0;  
 %     for t = 1 : T

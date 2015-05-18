@@ -2,8 +2,8 @@ close all;
 clear all;
 clc;
 
-addpath('Data\TrainingImages\FACES\');
-addpath('Data\TrainingImages\NFACES\');
+addpath('Data/TrainingImages/FACES/');
+addpath('Data/TrainingImages/NFACES/');
 
 % Debug Point 1
 [im, ii_im] = LoadIm('face00001.bmp', 1);
@@ -103,10 +103,10 @@ imagesc(ii_im);
 % end
 % 
 % % Create the data required for training the face detector
-% dinfo5 = load('Data\DebugInfo\debuginfo5.mat');
-% train_inds = dinfo5.train_inds;
-% all_ftypes = dinfo5.all_ftypes;
-% SaveTrainingData(all_ftypes, train_inds, 'training_data.mat');
+ dinfo5 = load('Data/DebugInfo/debuginfo5.mat');
+ train_inds = dinfo5.train_inds;
+ all_ftypes = dinfo5.all_ftypes;
+ SaveTrainingData(all_ftypes, train_inds, 'training_data.mat');
 % 
 % disp('-');
 % disp('From now on you can load your saved file into Matlab with the following command:')

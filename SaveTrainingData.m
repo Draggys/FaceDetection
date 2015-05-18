@@ -10,8 +10,8 @@ function [ ] = SaveTrainingData( all_ftypes, train_inds, s_fn )
     H = 19;
     
     % Read face % non-face images
-    faces = LoadImDataDir('Data\TrainingImages\FACES\');
-    nfaces = LoadImDataDir('Data\TrainingImages\NFACES\');
+    faces = LoadImDataDir('Data/TrainingImages/FACES/');
+    nfaces = LoadImDataDir('Data/TrainingImages/NFACES/');
     ii_ims = [faces nfaces];
     all_ii_ims = ii_ims;
     ii_ims = ii_ims(:, train_inds);

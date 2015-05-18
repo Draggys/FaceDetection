@@ -8,6 +8,7 @@ function [ dets ] = ScanImageOverScale( Cparams, im, min_s, max_s, step_s, vargi
     
     interval = min_s:step_s:max_s;
     dets = [];
+    tmpDets = [];
     for i = 1 : length(interval)
        j = interval(i);
        imR = imresize(im, j);
@@ -16,7 +17,9 @@ function [ dets ] = ScanImageOverScale( Cparams, im, min_s, max_s, step_s, vargi
        else
            tmpDets = ScanImageFixedSize(Cparams, imR);
        end
-       dets = [dets; tmpDets/j];
+       if size(tmpDets, 1) ~= 0
+           dets = [dets; tmpDets/j];
+       end
     end
 end
 
