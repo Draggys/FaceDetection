@@ -16,11 +16,8 @@ Cparams = load('Cparams.mat');
 %DisplayDetections(im, dets);
 
 %im2 = imread('Data/TestImages/big_one_chris.png');
-im2 = imread('Data/TestImages/obama.jpg');
-theta = 3;
-theta = Cparams.thresh;
-dets = ScanImageOverScale(Cparams, im2, 0.6, 1.3, 0.1, theta);
-%dets = ScanImageOverScale(Cparams, im2, 0.02, 0.8, 0.05, theta);
+im2 = imread('Data/TestImages/IMG_0190.jpg');
+dets = ScanImageOverScale(Cparams, im2, 0.1, 1, 0.06);
 DisplayDetections(im2, dets);
 
 % profile viewer
